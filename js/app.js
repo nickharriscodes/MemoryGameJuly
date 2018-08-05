@@ -2,7 +2,8 @@
  * Create a list that holds all of your cards
  */
 
-const allTheCards = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-anchor", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube",  "fa fa-anchor", "fa fa-anchor", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle"] 
+const squares = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-anchor", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube",  "fa fa-anchor", "fa fa-anchor", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle"];
+
 
 
 /*
@@ -12,30 +13,17 @@ const allTheCards = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "f
  *   - add each card's HTML to the page
  */
 
+const cardsContainer = document.querySelector(".deck")
 
-
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    const currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
+// use for loop to create the cards
+for (let i = 0; i < squares.length; i++) {
+  const card = document.createElement("li");
+  card.classList.add("card");
+  card.innerHTML = "<i class='" + squares[i] + "'</i>";
+  cardsContainer.appendChild(card);
 }
 
 //shuffle the cards, create a card's html, and add to page
-
-function makeCard () {
-  const mixCards = shuffle(allTheCards);
-  mixCards.forEach(function(allTheCard));
-}
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
