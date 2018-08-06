@@ -15,12 +15,20 @@ const squares = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa
 
 const cardsContainer = document.querySelector(".deck")
 
+
+
 // use for loop to create the cards
 for (let i = 0; i < squares.length; i++) {
   const card = document.createElement("li");
   card.classList.add("card");
-  card.innerHTML = "<i class='" + squares[i] + "'</i>";
+  card.innerHTML = "<i class='" + squares[i] + "'></i>";
   cardsContainer.appendChild(card);
+
+  //create event listener for card-clicked
+
+  card.addEventListener("click", function() {
+    card.classList.add("open", "show");
+  });
 }
 
 //shuffle the cards, create a card's html, and add to page
