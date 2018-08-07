@@ -15,7 +15,7 @@ const squares = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa
 
 const cardsContainer = document.querySelector(".deck")
 
-
+let openCards = [] //shell array to save clicked cards
 
 // use for loop to create the cards
 for (let i = 0; i < squares.length; i++) {
@@ -27,7 +27,26 @@ for (let i = 0; i < squares.length; i++) {
   //create event listener for card-clicked
 
   card.addEventListener("click", function() {
-    card.classList.add("open", "show");
+
+    //open cards and compare them
+    if(openCards.length === 1) {
+
+      card.classList.add("open", "show");
+      openCards.push(this);
+      // card comparison conditional
+      if(this.innerHTML === openCards[0].innerHTML){
+        console.log("we have got a match!!!")
+      } else {
+        console.log("sorry, no can do confederado!")
+      }
+
+
+    } else {
+
+      card.classList.add("open", "show");
+      openCards.push(this);
+
+    }
   });
 }
 
