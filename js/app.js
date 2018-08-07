@@ -50,10 +50,12 @@ for (let i = 0; i < squares.length; i++) {
       } else {
         console.log("sorry, no can do confederado!")
 
-        currentCard.classList.remove("open", "show");
-        previousCard.classList.remove("open", "show");
-
-        openCards = [];
+          //show the opened non-matched cards for a moment before hiding again
+          setTimeout(function() {
+            currentCard.classList.remove("open", "show");
+            previousCard.classList.remove("open", "show");
+            openCards = [];
+          }, 500);
 
       }
 
