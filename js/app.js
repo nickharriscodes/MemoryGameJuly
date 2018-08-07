@@ -45,6 +45,7 @@ for (let i = 0; i < squares.length; i++) {
 
         matchingCards.push(currentCard, previousCard); //store match in matchingCards
         openCards = []; //reset open cards array
+        youWin(); //check to see if all cards are matched
 
       } else {
         console.log("sorry, no can do confederado!")
@@ -63,6 +64,12 @@ for (let i = 0; i < squares.length; i++) {
 
     }
   });
+}
+
+function youWin() {
+  if (matchingCards.length === squares.length) {
+    alert("You're done! Hope it was fun!");
+  }
 }
 
 //shuffle the cards, create a card's html, and add to page
