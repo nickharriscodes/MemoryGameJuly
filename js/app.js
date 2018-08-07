@@ -15,7 +15,8 @@ const squares = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa
 
 const cardsContainer = document.querySelector(".deck")
 
-let openCards = [] //shell array to save clicked cards
+let openCards = [] //shell array to temporarily save clicked cards
+let matchingCards = [] //array to save matches
 
 // use for loop to create the cards
 for (let i = 0; i < squares.length; i++) {
@@ -34,8 +35,6 @@ for (let i = 0; i < squares.length; i++) {
     //open cards and compare them
     if(openCards.length === 1) {
 
-
-
       card.classList.add("open", "show");
       openCards.push(this);
       // card comparison conditional
@@ -44,8 +43,8 @@ for (let i = 0; i < squares.length; i++) {
         currentCard.classList.add("match");
         previousCard.classList.add("match");
 
-        openCards = [] //reset open cards array
-
+        matchingCards.push(currentCard, previousCard); //store match in matchingCards
+        openCards = []; //reset open cards array
 
       } else {
         console.log("sorry, no can do confederado!")
@@ -56,7 +55,6 @@ for (let i = 0; i < squares.length; i++) {
         openCards = [];
 
       }
-
 
     } else {
 
