@@ -28,16 +28,33 @@ for (let i = 0; i < squares.length; i++) {
 
   card.addEventListener("click", function() {
 
+    const currentCard = this;
+    const previousCard = openCards[0];
+
     //open cards and compare them
     if(openCards.length === 1) {
+
+
 
       card.classList.add("open", "show");
       openCards.push(this);
       // card comparison conditional
-      if(this.innerHTML === openCards[0].innerHTML){
-        console.log("we have got a match!!!")
+      if(currentCard.innerHTML === previousCard.innerHTML){
+
+        currentCard.classList.add("match");
+        previousCard.classList.add("match");
+
+        openCards = [] //reset open cards array
+
+
       } else {
         console.log("sorry, no can do confederado!")
+
+        currentCard.classList.remove("open", "show");
+        previousCard.classList.remove("open", "show");
+
+        openCards = [];
+
       }
 
 
