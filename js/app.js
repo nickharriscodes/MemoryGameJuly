@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 
-const squares = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-anchor", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube",  "fa fa-anchor", "fa fa-anchor", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle"];
+const squares = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-anchor", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube",  "fa fa-bomb", "fa fa-bomb", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle"];
 
 
 
@@ -19,9 +19,20 @@ let openCards = [] //shell array to temporarily save clicked cards
 let matchingCards = [] //array to save matches
 let seconds = 1;
 
-//initialize the game. Function contains all code.
+//Shuffle (function from comments on http://stackoverflow.com/a/2450976)
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
+//initialize the game
 function init() {
   clock (seconds);
+  shuffleArray (squares);
   // use for loop to create the cards
   for (let i = 0; i < squares.length; i++) {
     const card = document.createElement("li");
@@ -80,12 +91,14 @@ function comparison (currentCard, previousCard) {
   }
 }
 
+
 //game timer
 function clock(seconds){
-  setInterval (function myTimer() {
+  const myClock = setInterval (function myTimer() {
     document.querySelector(".timer").innerHTML = seconds++;
   }, 1000);
 }
+
 
 //rating system
 const starsContainer = document.querySelector(".stars");
@@ -123,7 +136,11 @@ const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click", function() {
   //delete cards
   cardsContainer.innerHTML = "";
+  //reset score panel
   movesContainer.innerHTML = "0";
+  starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li>\
+  <li><i class="fa fa-star"></i></li>\
+  <li><i class="fa fa-star"></i></li>'
 
   //call init to begin new game
   init();
@@ -131,6 +148,7 @@ restartBtn.addEventListener("click", function() {
   //reset variables
   matchingCards = [];
   moves = 0;
+  seconds = 1;
 });
 
 //shuffle the cards, create a card's html, and add to page
