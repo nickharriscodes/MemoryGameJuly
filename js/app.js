@@ -18,15 +18,22 @@ const cardsContainer = document.querySelector(".deck")
 let openCards = [] //shell array to temporarily save clicked cards
 let matchingCards = [] //array to save matches
 
-// use for loop to create the cards
-for (let i = 0; i < squares.length; i++) {
-  const card = document.createElement("li");
-  card.classList.add("card");
-  card.innerHTML = "<i class='" + squares[i] + "'></i>";
-  cardsContainer.appendChild(card);
+//initialize the game. Function contains all code.
 
-  //create event listener for card-clicked
+function init() {
+  // use for loop to create the cards
+  for (let i = 0; i < squares.length; i++) {
+    const card = document.createElement("li");
+    card.classList.add("card");
+    card.innerHTML = "<i class='" + squares[i] + "'></i>";
+    cardsContainer.appendChild(card);
+    //create event listener for card-clicked
+    click(card);
+  }
+}
 
+
+function click (card) {
   card.addEventListener("click", function() {
 
     const currentCard = this;
@@ -38,26 +45,7 @@ for (let i = 0; i < squares.length; i++) {
       card.classList.add("open", "show");
       openCards.push(this);
       // card comparison conditional
-      if(currentCard.innerHTML === previousCard.innerHTML){
-
-        currentCard.classList.add("match");
-        previousCard.classList.add("match");
-
-        matchingCards.push(currentCard, previousCard); //store match in matchingCards
-        openCards = []; //reset open cards array
-        youWin(); //check to see if all cards are matched
-
-      } else {
-        console.log("sorry, no can do confederado!")
-
-          //show the opened non-matched cards for a moment before hiding again
-          setTimeout(function() {
-            currentCard.classList.remove("open", "show");
-            previousCard.classList.remove("open", "show");
-            openCards = [];
-          }, 500);
-
-      }
+      comparison(currentCard, previousCard);
 
     } else {
 
@@ -68,6 +56,28 @@ for (let i = 0; i < squares.length; i++) {
   });
 }
 
+function comparison (currentCard, previousCard) {
+  if(currentCard.innerHTML === previousCard.innerHTML){
+
+    currentCard.classList.add("match");
+    previousCard.classList.add("match");
+
+    matchingCards.push(currentCard, previousCard); //store match in matchingCards
+    openCards = []; //reset open cards array
+    youWin(); //check to see if all cards are matched
+
+  } else {
+    console.log("sorry, no can do confederado!")
+
+      //show the opened non-matched cards for a moment before hiding again
+      setTimeout(function() {
+        currentCard.classList.remove("open", "show");
+        previousCard.classList.remove("open", "show");
+        openCards = [];
+      }, 500);
+  }
+}
+
 function youWin() {
   if (matchingCards.length === squares.length) {
     alert("You're done! Hope it was fun!");
@@ -75,6 +85,9 @@ function youWin() {
 }
 
 //shuffle the cards, create a card's html, and add to page
+
+//start the game
+init();
 
 /*
  * set up the event listener for a card. If a card is clicked:
