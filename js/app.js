@@ -87,6 +87,17 @@ function clock(seconds){
   }, 1000);
 }
 
+//rating system
+const starsContainer = document.querySelector(".stars");
+function rating() {
+  if (moves > 9 && moves < 14) {
+    starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
+  } else {
+    if (moves > 13) {
+      starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li>';
+    }
+  }
+}
 
 //tally moves
 const movesContainer = document.querySelector(".moves");
@@ -95,13 +106,14 @@ movesContainer.innerHTML = 0;
 function increaseMove () {
   moves++;
   movesContainer.innerHTML = moves;
+  rating();
 }
 
 //message to tell player game is over
 function youWin() {
   setTimeout (function () {
     if (matchingCards.length === squares.length) {
-      alert("You're done! Hope it was fun!");
+      alert("You're done! Hope it was fun! It took you " + moves + " moves and " + seconds + " seconds to win. Nice Work!");
     }
   }, 501);
 }
