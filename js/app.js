@@ -42,14 +42,14 @@ function click (card) {
     //open cards and compare them
     if(openCards.length === 1) {
 
-      card.classList.add("open", "show");
+      card.classList.add("open", "show", "endclick");
       openCards.push(this);
       // card comparison conditional
       comparison(currentCard, previousCard);
 
     } else {
 
-      card.classList.add("open", "show");
+      card.classList.add("open", "show", "endclick");
       openCards.push(this);
 
     }
@@ -71,8 +71,8 @@ function comparison (currentCard, previousCard) {
 
       //show the opened non-matched cards for a moment before hiding again
       setTimeout(function() {
-        currentCard.classList.remove("open", "show");
-        previousCard.classList.remove("open", "show");
+        currentCard.classList.remove("open", "show", "endclick");
+        previousCard.classList.remove("open", "show", "endclick");
         openCards = [];
       }, 500);
   }
