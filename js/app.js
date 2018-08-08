@@ -17,9 +17,11 @@ const cardsContainer = document.querySelector(".deck")
 
 let openCards = [] //shell array to temporarily save clicked cards
 let matchingCards = [] //array to save matches
+let seconds = 1;
 
 //initialize the game. Function contains all code.
 function init() {
+  clock (seconds);
   // use for loop to create the cards
   for (let i = 0; i < squares.length; i++) {
     const card = document.createElement("li");
@@ -78,9 +80,18 @@ function comparison (currentCard, previousCard) {
   }
 }
 
+//game timer
+function clock(seconds){
+  setInterval (function myTimer() {
+    document.querySelector(".timer").innerHTML = seconds++;
+  }, 1000);
+}
+
+
 //tally moves
 const movesContainer = document.querySelector(".moves");
 let moves = 0;
+movesContainer.innerHTML = 0;
 function increaseMove () {
   moves++;
   movesContainer.innerHTML = moves;
@@ -95,11 +106,7 @@ function youWin() {
   }, 501);
 }
 
-/*
-* Restart
-* Button
-*/
-
+// restart button
 const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click", function() {
   //delete cards
@@ -111,7 +118,7 @@ restartBtn.addEventListener("click", function() {
 
   //reset variables
   matchingCards = [];
-  moves = [];
+  moves = 0;
 });
 
 //shuffle the cards, create a card's html, and add to page
