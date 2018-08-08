@@ -126,7 +126,17 @@ function increaseMove () {
 function youWin() {
   setTimeout (function () {
     if (matchingCards.length === squares.length) {
-      alert("You're done! Hope it was fun! It took you " + moves + " moves and " + seconds + " seconds to win. Nice Work!");
+      if (moves < 10) {
+        alert("You're done! Hope it was fun! It took you " + moves + " moves and " + seconds + " seconds to win.\
+        You got a three-star rating. Nice work!");
+      } else if (moves > 10 && moves < 15) {
+        alert("You're done! Hope it was fun! It took you " + moves + " moves and " + seconds + " seconds to win.\
+        You got a two-star rating. Nice work!");
+      } else {
+        alert("You're done! Hope it was fun! It took you " + moves + " moves and " + seconds + " seconds to win.\
+        You got a one-star rating. Better luck next time.");
+      }
+
     }
   }, 501);
 }
