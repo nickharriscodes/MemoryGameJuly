@@ -19,7 +19,6 @@ let openCards = [] //shell array to temporarily save clicked cards
 let matchingCards = [] //array to save matches
 
 //initialize the game. Function contains all code.
-
 function init() {
   // use for loop to create the cards
   for (let i = 0; i < squares.length; i++) {
@@ -32,7 +31,7 @@ function init() {
   }
 }
 
-
+//event listener for cards
 function click (card) {
   card.addEventListener("click", function() {
 
@@ -46,7 +45,7 @@ function click (card) {
       openCards.push(this);
       // card comparison conditional
       comparison(currentCard, previousCard);
-
+      increaseMove();
     } else {
 
       card.classList.add("open", "show", "endclick");
@@ -56,6 +55,7 @@ function click (card) {
   });
 }
 
+//find out if there's a match
 function comparison (currentCard, previousCard) {
   if(currentCard.innerHTML === previousCard.innerHTML){
 
@@ -78,10 +78,21 @@ function comparison (currentCard, previousCard) {
   }
 }
 
+//tally moves
+const movesContainer = document.querySelector(".moves");
+let moves = 0;
+function increaseMove () {
+  moves++;
+  movesContainer.innerHTML = moves;
+}
+
+//message to tell player game is over
 function youWin() {
-  if (matchingCards.length === squares.length) {
-    alert("You're done! Hope it was fun!");
-  }
+  setTimeout (function () {
+    if (matchingCards.length === squares.length) {
+      alert("You're done! Hope it was fun!");
+    }
+  }, 501);
 }
 
 /*
@@ -93,12 +104,14 @@ const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click", function() {
   //delete cards
   cardsContainer.innerHTML = "";
+  movesContainer.innerHTML = "0";
 
   //call init to begin new game
   init();
 
   //reset variables
   matchingCards = [];
+  moves = [];
 });
 
 //shuffle the cards, create a card's html, and add to page
