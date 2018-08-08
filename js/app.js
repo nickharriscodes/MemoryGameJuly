@@ -84,6 +84,23 @@ function youWin() {
   }
 }
 
+/*
+* Restart
+* Button
+*/
+
+const restartBtn = document.querySelector(".restart");
+restartBtn.addEventListener("click", function() {
+  //delete cards
+  cardsContainer.innerHTML = "";
+
+  //call init to begin new game
+  init();
+
+  //reset variables
+  matchingCards = [];
+});
+
 //shuffle the cards, create a card's html, and add to page
 
 //start the game
