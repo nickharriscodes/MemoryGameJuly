@@ -17,7 +17,7 @@ const cardsContainer = document.querySelector(".deck")
 
 let openCards = [] //shell array to temporarily save clicked cards
 let matchingCards = [] //array to save matches
-let seconds = 1;
+let seconds = 00;
 
 //Shuffle (function from comments on http://stackoverflow.com/a/2450976)
 function shuffleArray(array) {
@@ -31,7 +31,7 @@ function shuffleArray(array) {
 
 //initialize the game
 function init() {
-  clock (seconds);
+
   shuffleArray (squares);
   // use for loop to create the cards
   for (let i = 0; i < squares.length; i++) {
@@ -44,9 +44,15 @@ function init() {
   }
 }
 
+let initialClick = true;
+
 //event listener for cards
 function click (card) {
   card.addEventListener("click", function() {
+    if(initialClick) {
+      clock (seconds);
+      initialClick = false;
+    }
 
     const currentCard = this;
     const previousCard = openCards[0];
@@ -99,6 +105,12 @@ function clock(seconds){
   }, 1000);
 }
 
+//stop the myTimer
+function stopClock (){
+  clearInterval(myClock);
+}
+
+
 
 //rating system
 const starsContainer = document.querySelector(".stars");
@@ -127,13 +139,14 @@ function youWin() {
   setTimeout (function () {
     if (matchingCards.length === squares.length) {
       if (moves < 10) {
-        alert("You're done! Hope it was fun! It took you " + moves + " moves and " + seconds + " seconds to win.\
+        stopClock();
+        alert("You're done! Hope it was fun! It took you " + moves + " moves and " + document.querySelector(".timer").innerHTML + " seconds to win.\
         You got a three-star rating. Nice work!");
       } else if (moves > 10 && moves < 15) {
-        alert("You're done! Hope it was fun! It took you " + moves + " moves and " + seconds + " seconds to win.\
+        alert("You're done! Hope it was fun! It took you " + moves + " moves and " + document.querySelector(".timer").innerHTML + " seconds to win.\
         You got a two-star rating. Nice work!");
       } else {
-        alert("You're done! Hope it was fun! It took you " + moves + " moves and " + seconds + " seconds to win.\
+        alert("You're done! Hope it was fun! It took you " + moves + " moves and " + document.querySelector(".timer").innerHTML + " seconds to win.\
         You got a one-star rating. Better luck next time.");
       }
 
@@ -151,14 +164,16 @@ restartBtn.addEventListener("click", function() {
   starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li>\
   <li><i class="fa fa-star"></i></li>\
   <li><i class="fa fa-star"></i></li>'
-
   //call init to begin new game
+
   init();
 
   //reset variables
+  stopClock();
   matchingCards = [];
   moves = 0;
-  seconds = 1;
+  seconds = 0;
+  openCards = [];
 });
 
 //shuffle the cards, create a card's html, and add to page
