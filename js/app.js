@@ -13,7 +13,8 @@ const squares = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa
  *   - add each card's HTML to the page
  */
 
-const cardsContainer = document.querySelector(".deck")
+const cardsContainer = document.querySelector(".deck");
+const secondsContainer = document.querySelector(".timer");
 
 let openCards = [] //shell array to temporarily save clicked cards
 let matchingCards = [] //array to save matches
@@ -50,7 +51,7 @@ let initialClick = true;
 function click (card) {
   card.addEventListener("click", function() {
     if(initialClick) {
-      clock (seconds);
+      myClock;
       initialClick = false;
     }
 
@@ -99,16 +100,34 @@ function comparison (currentCard, previousCard) {
 
 
 //game timer
-function clock(seconds){
-  const myClock = setInterval (function myTimer() {
-    document.querySelector(".timer").innerHTML = seconds++;
-  }, 1000);
-}
 
-//stop the myTimer
+const myClock = setInterval (function myTimer() {
+  document.querySelector(".timer").innerHTML = seconds++;
+}, 1000);
+
 function stopClock (){
   clearInterval(myClock);
 }
+
+
+//function clock(seconds){
+  //if (matchingCards.length != squares.length) {
+    //const myClock = setInterval (function myTimer() {
+      //document.querySelector(".timer").innerHTML = seconds++;
+    //}, 1000);
+  //}
+  //else if (matchingCards.length === squares.length) {
+    //const stopper = function stopClock (){
+      //clearInterval(myClock);
+    //}
+  //}
+//}
+
+
+//stop the myTimer
+//function stopClock (){
+  //clearInterval(myClock);
+//}
 
 
 
@@ -138,8 +157,8 @@ function increaseMove () {
 function youWin() {
   setTimeout (function () {
     if (matchingCards.length === squares.length) {
+      stopClock();
       if (moves < 10) {
-        stopClock();
         alert("You're done! Hope it was fun! It took you " + moves + " moves and " + document.querySelector(".timer").innerHTML + " seconds to win.\
         You got a three-star rating. Nice work!");
       } else if (moves > 10 && moves < 15) {
@@ -157,6 +176,8 @@ function youWin() {
 // restart button
 const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click", function() {
+  //stop timer
+  stopClock();
   //delete cards
   cardsContainer.innerHTML = "";
   //reset score panel
@@ -164,17 +185,19 @@ restartBtn.addEventListener("click", function() {
   starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li>\
   <li><i class="fa fa-star"></i></li>\
   <li><i class="fa fa-star"></i></li>'
-  //call init to begin new game
 
-  init();
 
   //reset variables
-  stopClock();
+  initialClick = true;
   matchingCards = [];
   moves = 0;
-  seconds = 0;
+  secondsContainer.innerHTML = "";
   openCards = [];
+  //call init to begin new game
+  init();
 });
+
+
 
 //shuffle the cards, create a card's html, and add to page
 
