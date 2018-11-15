@@ -102,43 +102,12 @@ function comparison (currentCard, previousCard) {
 
 //game timer
 
-
-
-const myTimer = function () {
-  document.querySelector(".timer").innerHTML = seconds++;
-}
-
 function clock (){
   myClock = setInterval (function(){
     seconds++;
     secondsContainer.innerHTML = seconds;
   }, 1000);
 }
-
-//const myClock = setInterval (function myTimer() {
-  //document.querySelector(".timer").innerHTML = seconds++;
-//}, 1000);
-
-//function stopClock (){
-  //clearInterval(myClock);
-//}
-
-
-
-
-//function clock(seconds){
-  //if (matchingCards.length != squares.length) {
-    //const myClock = setInterval (function myTimer() {
-      //document.querySelector(".timer").innerHTML = seconds++;
-    //}, 1000);
-  //}
-  //else if (matchingCards.length === squares.length) {
-    //const stopper = function stopClock (){
-      //clearInterval(myClock);
-    //}
-  //}
-//}
-
 
 //stop the myTimer
 function stopClock (){
