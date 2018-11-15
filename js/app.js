@@ -164,17 +164,21 @@ function youWin() {
 // restart button
 const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click", function() {
-  //stop timer
-  stopClock();
   //delete cards
   cardsContainer.innerHTML = "";
+  reset();
+  init();
+});
+
+function reset() {
   //reset score panel
   movesContainer.innerHTML = "0";
   starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li>\
   <li><i class="fa fa-star"></i></li>\
   <li><i class="fa fa-star"></i></li>'
 
-
+  //stop timer
+  stopClock();
   //reset variables
   initialClick = true;
   matchingCards = [];
@@ -184,8 +188,7 @@ restartBtn.addEventListener("click", function() {
   myClock,
   seconds = 0;
   //call init to begin new game
-  init();
-});
+};
 
 
 
