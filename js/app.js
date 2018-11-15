@@ -140,6 +140,17 @@ function increaseMove () {
   rating();
 }
 
+//new game button in modal
+const newGameBtn = document.querySelector(".new")
+//start a new game when play clicks the new game message in modal
+newGameBtn.addEventListener("click", function() {
+  //delete cards
+  cardsContainer.innerHTML = "";
+  modal.style.display = "none";
+  init();
+  reset();
+});
+
 //message to tell player game is over
 function youWin() {
   setTimeout (function () {
@@ -166,8 +177,10 @@ const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click", function() {
   //delete cards
   cardsContainer.innerHTML = "";
-  reset();
+
   init();
+
+  reset();
 });
 
 function reset() {
