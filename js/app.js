@@ -15,6 +15,8 @@ const squares = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa
 
 const cardsContainer = document.querySelector(".deck");
 const secondsContainer = document.querySelector(".timer");
+const modal = document.querySelector(".modal");
+const modalText = document.querySelector(".modal-message");
 
 let openCards = [] //shell array to temporarily save clicked cards
 let matchingCards = [] //array to save matches
@@ -142,16 +144,17 @@ function increaseMove () {
 function youWin() {
   setTimeout (function () {
     if (matchingCards.length === squares.length) {
-      stopClock();                                                                                                                      ;
+      stopClock();
+      modal.style.display = "block";                                                                                                                    ;
       if (moves < 10) {
-        alert("You're done! Hope it was fun! It took you " + moves + " moves and " + document.querySelector(".timer").innerHTML + " seconds to win.\
-        You got a three-star rating. Nice work!");
+        modalText.innerHTML = "You're done! Hope it was fun! It took you " + moves + " moves and " + document.querySelector(".timer").innerHTML + " seconds to win.\
+        You got a three-star rating. Nice work!"
       } else if (moves > 10 && moves < 15) {
-        alert("You're done! Hope it was fun! It took you " + moves + " moves and " + document.querySelector(".timer").innerHTML + " seconds to win.\
-        You got a two-star rating. Nice work!");
+        modalText.innerHTML = "You're done! Hope it was fun! It took you " + moves + " moves and " + document.querySelector(".timer").innerHTML + " seconds to win.\
+        You got a two-star rating. Nice work!"
       } else {
-        alert("You're done! Hope it was fun! It took you " + moves + " moves and " + document.querySelector(".timer").innerHTML + " seconds to win.\
-        You got a one-star rating. Better luck next time.");
+        modalText.innerHTML = "You're done! Hope it was fun! It took you " + moves + " moves and " + document.querySelector(".timer").innerHTML + " seconds to win.\
+        You got a one-star rating. Better luck next time."
       }
 
     }
