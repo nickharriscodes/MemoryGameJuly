@@ -18,7 +18,8 @@ const secondsContainer = document.querySelector(".timer");
 
 let openCards = [] //shell array to temporarily save clicked cards
 let matchingCards = [] //array to save matches
-let seconds = 00;
+let myClock,
+    seconds = 0;
 
 //Shuffle (function from comments on http://stackoverflow.com/a/2450976)
 function shuffleArray(array) {
@@ -51,7 +52,7 @@ let initialClick = true;
 function click (card) {
   card.addEventListener("click", function() {
     if(initialClick) {
-      myClock;
+      clock();
       initialClick = false;
     }
 
@@ -101,13 +102,28 @@ function comparison (currentCard, previousCard) {
 
 //game timer
 
-const myClock = setInterval (function myTimer() {
-  document.querySelector(".timer").innerHTML = seconds++;
-}, 1000);
 
-function stopClock (){
-  clearInterval(myClock);
+
+const myTimer = function () {
+  document.querySelector(".timer").innerHTML = seconds++;
 }
+
+function clock (){
+  myClock = setInterval (function(){
+    seconds++;
+    secondsContainer.innerHTML = seconds;
+  }, 1000);
+}
+
+//const myClock = setInterval (function myTimer() {
+  //document.querySelector(".timer").innerHTML = seconds++;
+//}, 1000);
+
+//function stopClock (){
+  //clearInterval(myClock);
+//}
+
+
 
 
 //function clock(seconds){
@@ -125,9 +141,9 @@ function stopClock (){
 
 
 //stop the myTimer
-//function stopClock (){
-  //clearInterval(myClock);
-//}
+function stopClock (){
+  clearInterval(myClock);
+}
 
 
 
@@ -157,7 +173,7 @@ function increaseMove () {
 function youWin() {
   setTimeout (function () {
     if (matchingCards.length === squares.length) {
-      stopClock();
+      stopClock();                                                                                                                      ;
       if (moves < 10) {
         alert("You're done! Hope it was fun! It took you " + moves + " moves and " + document.querySelector(".timer").innerHTML + " seconds to win.\
         You got a three-star rating. Nice work!");
@@ -193,6 +209,8 @@ restartBtn.addEventListener("click", function() {
   moves = 0;
   secondsContainer.innerHTML = "";
   openCards = [];
+  myClock,
+  seconds = 0;
   //call init to begin new game
   init();
 });
